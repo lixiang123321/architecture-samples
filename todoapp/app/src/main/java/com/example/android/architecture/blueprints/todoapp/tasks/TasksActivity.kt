@@ -112,6 +112,7 @@ class TasksActivity : AppCompatActivity(), TaskItemNavigator, TasksNavigator {
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         viewModel.handleActivityResult(requestCode, resultCode)
     }
 

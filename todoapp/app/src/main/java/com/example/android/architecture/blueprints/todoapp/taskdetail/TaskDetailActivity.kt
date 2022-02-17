@@ -56,7 +56,7 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
 
     private fun findOrCreateViewFragment() =
             supportFragmentManager.findFragmentById(R.id.contentFrame) ?:
-                    TaskDetailFragment.newInstance(intent.getStringExtra(EXTRA_TASK_ID))
+                    TaskDetailFragment.newInstance(intent.getStringExtra(EXTRA_TASK_ID) as String)
 
     private fun subscribeToNavigationChanges(viewModel: TaskDetailViewModel) {
         // The activity observes the navigation commands in the ViewModel
@@ -70,6 +70,7 @@ class TaskDetailActivity : AppCompatActivity(), TaskDetailNavigator {
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_EDIT_TASK) {
             // If the task was edited successfully, go back to the list.
             if (resultCode == ADD_EDIT_RESULT_OK) {
