@@ -27,7 +27,7 @@ import java.util.LinkedHashMap
  * obtained from the server, by using the remote data source only if the local database doesn't
  * exist or is empty.
  */
-class TasksRepository(
+class TasksRepository private constructor(
         val tasksRemoteDataSource: TasksDataSource,
         val tasksLocalDataSource: TasksDataSource
 ) : TasksDataSource {
@@ -91,6 +91,18 @@ class TasksRepository(
             tasksRemoteDataSource.completeTask(it)
             tasksLocalDataSource.completeTask(it)
         }
+
+        // cacheAndPerform写得很好，我只能写出下面这个。它用了it。可以在lambda里继续修改那个参数。
+        abc({
+            it.isCompleted = true
+        }, task)
+    }
+
+    fun abc(perform: (Task) -> Unit, task: Task) {
+        perform(task)
+
+        tasksRemoteDataSource.completeTask(task)
+        tasksLocalDataSource.completeTask(task)
     }
 
     override fun completeTask(taskId: String) {
@@ -221,6 +233,11 @@ class TasksRepository(
         }
         cachedTasks.put(cachedTask.id, cachedTask)
         perform(cachedTask)
+
+        // rere:
+        // perform: Task.() -> Unit
+        // cachedTask.perform()
+        // this
     }
 
     companion object {

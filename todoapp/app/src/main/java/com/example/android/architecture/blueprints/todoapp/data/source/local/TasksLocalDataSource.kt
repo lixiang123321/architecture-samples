@@ -25,8 +25,8 @@ import com.example.android.architecture.blueprints.todoapp.util.AppExecutors
  * Concrete implementation of a data source as a db.
  */
 class TasksLocalDataSource private constructor(
-        val appExecutors: AppExecutors,
-        val tasksDao: TasksDao
+    private val appExecutors: AppExecutors,
+    private val tasksDao: TasksDao
 ) : TasksDataSource {
 
     /**

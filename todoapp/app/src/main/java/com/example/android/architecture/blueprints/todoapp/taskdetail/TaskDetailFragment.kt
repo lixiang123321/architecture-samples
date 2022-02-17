@@ -80,7 +80,7 @@ class TaskDetailFragment : Fragment(), TaskDetailContract.View {
         return deletePressed
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.taskdetail_fragment_menu, menu)
     }
 

@@ -47,7 +47,7 @@ class TaskDetailActivity : AppCompatActivity() {
                     replaceFragmentInActivity(it, R.id.contentFrame)
                 }
         // Create the presenter
-        TaskDetailPresenter(taskId, Injection.provideTasksRepository(applicationContext),
+        TaskDetailPresenter(taskId as String, Injection.provideTasksRepository(applicationContext),
                 taskDetailFragment)
     }
 

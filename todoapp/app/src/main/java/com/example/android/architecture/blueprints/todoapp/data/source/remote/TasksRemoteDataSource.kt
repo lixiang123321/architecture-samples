@@ -68,6 +68,18 @@ object TasksRemoteDataSource : TasksDataSource {
                 postDelayed({ callback.onDataNotAvailable() }, SERVICE_LATENCY_IN_MILLIS)
             }
         }
+
+        // rere:
+        // 这样写不是更好吗。。。
+        /*with(Handler()) {
+            postDelayed({
+                if (task != null) {
+                    callback.onTaskLoaded(task)
+                } else {
+                    callback.onDataNotAvailable()
+                }
+            }, SERVICE_LATENCY_IN_MILLIS)
+        }*/
     }
 
     override fun saveTask(task: Task) {
